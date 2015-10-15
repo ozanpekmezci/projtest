@@ -12,6 +12,9 @@
       <li>Last login at: <%= current_user.last_login_at %></li>
       <li>Current login IP: <%= current_user.current_login_ip %></li>
       <li>Last login IP: <%= current_user.last_login_ip %></li>
+      <li>  <%= link_to user_path(current_user), class: 'btn btn-primary btn-lg' do %>
+          Profile &raquo;
+        <% end %></li>
     </ul>
   </div>
 <% else %>

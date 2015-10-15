@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
   acts_as_authentic
   def deliver_password_reset_instructions!
   reset_perishable_token!
