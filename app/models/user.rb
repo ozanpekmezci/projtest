@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
   reset_perishable_token!
   PasswordResetMailer.reset_email(self).deliver_now
 end
+def feed
+  Micropost.where("user_id = ?", id)
+end
 end
