@@ -15,8 +15,11 @@ has_many :passive_relationships, class_name:  "Relationship",
   PasswordResetMailer.reset_email(self).deliver_now
 end
 def feed
-  Micropost.where("user_id = ?", id)
-end
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+  end
 # Follows a user.
  def follow(other_user)
    active_relationships.create(followed_id: other_user.id)
