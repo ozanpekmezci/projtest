@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
-  resources :users, only: [:new, :create,:show]
-
+  resources :users do
+     member do
+       get :following, :followers
+     end
+   end
 resources :user_sessions, only: [:create, :destroy]
 
 delete '/sign_out', to: 'user_sessions#destroy', as: :sign_out
